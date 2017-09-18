@@ -12,10 +12,8 @@ import org.openqa.selenium.remote.DesiredCapabilities;
 
 //Import Enums
 import enums.DriverType;
+import utilities.PathHelper;
 import enums.DeviceType;
-
-//Import Helpers
-import helpers.DriverPathHelper;
 
 public class DriverFactory {
 	
@@ -66,7 +64,7 @@ public class DriverFactory {
 
 	private static void setSystemProperty(DriverType driverType) {
 		String key = driverType.getSystemPropertyKey();
-		String driverPath = DriverPathHelper.driverPath(driverType);
+		String driverPath = PathHelper.driverPath(driverType);
 		System.setProperty(key, driverPath);
 	}
 }
