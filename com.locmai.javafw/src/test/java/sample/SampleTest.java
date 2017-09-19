@@ -7,13 +7,14 @@ import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 
+import enums.DeviceType;
 //Core 
 import enums.DriverType;
 import factories.DriverFactory;
 
 public class SampleTest {
-	WebDriver driver = DriverFactory.getDriver(DriverType.CHROME);
-	
+	WebDriver driver = DriverFactory.getDriver(DriverType.CHROME,DeviceType.IPAD_MINI);
+	//WebDriver driver = DriverFactory.getDriver(DriverType.CHROME);
 	@Test
 	public void f() {
 		driver.get("https://www.whatismybrowser.com/");

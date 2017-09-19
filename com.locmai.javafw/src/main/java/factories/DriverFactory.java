@@ -1,24 +1,24 @@
 package factories;
 
+import java.util.HashMap;
+import java.util.Map;
+
 //Import Selenium Packages
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.remote.DesiredCapabilities;
 
 //Import Enums
 import enums.DriverType;
-
-//Import Helpers
-import helpers.DriverPathHelper;
+import utilities.PathHelper;
+import enums.DeviceType;
 
 public class DriverFactory {
 	
-
 	public static WebDriver getDriver(DriverType driverType) {
-		String key = driverType.getSystemPropertyKey();
-		String driverPath = DriverPathHelper.driverPath(driverType);
-		System.setProperty(key, driverPath);
+		setSystemProperty(driverType);
 		WebDriver driver;
 		switch (driverType) {
 		case CHROME:
@@ -31,41 +31,40 @@ public class DriverFactory {
 			driver = new ChromeDriver();
 			break;
 		}
-		
 		return driver;
 	}
+	
+	public static WebDriver getDriver(DriverType driverType,DeviceType deviceType) {
+		setSystemProperty(driverType);
+		
+		WebDriver driver;
+		switch (driverType) {
+		case CHROME:
+			driver = new ChromeDriver(getChromeCapabilities(deviceType));
+			break;
+		case FIREFOX:
+			driver = new FirefoxDriver();
+			break;
+		default:
+			driver = new ChromeDriver();
+			break;
+		}
+		return driver;
+	}
+	
+	private static DesiredCapabilities getChromeCapabilities(DeviceType device) {
+		Map<String, String> mobileEmulation = new HashMap<String, String>();
+		mobileEmulation.put("deviceName", device.getDeviceName());
+		Map<String, Object> deviceOptions = new HashMap<String, Object>();
+		deviceOptions.put("mobileEmulation", mobileEmulation);
+		DesiredCapabilities capabilities = DesiredCapabilities.chrome();
+		capabilities.setCapability(ChromeOptions.CAPABILITY,deviceOptions);
+		return capabilities;
+	}
 
-	// public static WebDriver getDriver(DriverType driverType, DesiredCapabilities
-	// capabilities) {
-	// WebDriver driver = getDriver(driverType);
-	// return driver;
-	// }
-
-	// public static WebDriver getDriver(DriverType driverType) {
-	//
-	//// Map<String, String> mobileEmulation = new HashMap<String, String>();
-	//// mobileEmulation.put("deviceName", "Nexus 5");
-	////
-	//// Map<String, Object> chromeOptions = new HashMap<String, Object>();
-	//// chromeOptions.put("mobileEmulation", mobileEmulation);
-	//// DesiredCapabilities capabilities = DesiredCapabilities.chrome();
-	//// capabilities.setCapability(ChromeOptions.CAPABILITY, chromeOptions);
-	//
-	// String dir = System.getProperty("user.dir");
-	// System.setProperty("webdriver.chrome.driver",
-	// dir+"\\drivers\\chromedriver.exe");
-	// WebDriver driver;
-	//// switch (driverType) {
-	//// case CHROME:
-	//// driver = new ChromeDriver(capabilities);
-	//// break;
-	//// case FIREFOX:
-	//// driver = new FirefoxDriver();
-	//// break;
-	//// default:
-	//// driver = new ChromeDriver();
-	//// break;
-	//// }
-	//// return driver;
-	// }
+	private static void setSystemProperty(DriverType driverType) {
+		String key = driverType.getSystemPropertyKey();
+		String driverPath = PathHelper.driverPath(driverType);
+		System.setProperty(key, driverPath);
+	}
 }
