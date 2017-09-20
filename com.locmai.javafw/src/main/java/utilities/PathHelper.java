@@ -7,7 +7,6 @@ import enums.DriverType;
 
 public final class PathHelper {
 	public static String driverPath(DriverType driverType) {
-
 		File driverFolder = new File(findFolder("drivers"));
 		FilenameFilter driverFilter = new FilenameFilter() {
 			public boolean accept(File directory, String fileName) {
@@ -25,6 +24,10 @@ public final class PathHelper {
 
 	public static String logPath() {
 		return findFolder("logs");
+	}
+	
+	public static String datasetPath() {
+		return findFolder("dataset");
 	}
 	
 	private static String findFolder(String folderName) {

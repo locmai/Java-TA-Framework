@@ -13,7 +13,8 @@ import enums.DriverType;
 import factories.DriverFactory;
 
 public class SampleTest {
-	WebDriver driver = DriverFactory.getDriver(DriverType.CHROME,DeviceType.IPAD_MINI);
+	//WebDriver driver = DriverFactory.getDriver(DriverType.CHROME,DeviceType.IPAD_MINI);
+	WebDriver driver = DriverFactory.getDriver(DriverType.FIREFOX,DeviceType.IPAD_MINI);
 	//WebDriver driver = DriverFactory.getDriver(DriverType.CHROME);
 	@Test
 	public void f() {
