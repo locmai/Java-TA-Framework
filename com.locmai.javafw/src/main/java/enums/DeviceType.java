@@ -6,15 +6,10 @@ public enum DeviceType {
 	IPAD_MINI("iPad Mini");
 	private String deviceName;
 	private DeviceType(String deviceName) {
-		this.setDeviceName(deviceName);
-		
+		this.deviceName = deviceName;	
 	}
 	
 	public String getDeviceName() {
 		return deviceName;
-	}
-
-	public void setDeviceName(String deviceName) {
-		this.deviceName = deviceName;
 	}
 }
