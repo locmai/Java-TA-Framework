@@ -6,38 +6,39 @@ import java.io.FilenameFilter;
 import enums.DriverType;
 
 public final class PathHelper {
+	private final static String sourceDir = System.getProperty("user.dir");
+
 	public static String driverPath(DriverType driverType) {
-		File driverFolder = new File(findFolder("drivers"));
-		FilenameFilter driverFilter = new FilenameFilter() {
-			public boolean accept(File directory, String fileName) {
-				String driverName = driverType.getExecutableFileName();
-				return fileName.equals(driverName);
-			}
-		};
-		File[] myDriverPath = driverFolder.listFiles(driverFilter);
-		return myDriverPath[0].getPath();
+		File driverFolder = new File(findFile(sourceDir, "drivers"));
+		File driverPath = new File(findFile(driverFolder.getPath(), driverType.getExecutableFileName()));
+		return driverPath.getPath();
 	}
 
 	public static String reportPath() {
-		return findFolder("reports");
+		return findFile(sourceDir, "reports");
 	}
 
 	public static String logPath() {
-		return findFolder("logs");
+		return findFile(sourceDir, "logs");
 	}
-	
+
 	public static String datasetPath() {
-		return findFolder("dataset");
+		return findFile(sourceDir, "dataset");
 	}
-	
-	private static String findFolder(String folderName) {
+
+	public static String datasetPath(String fileName) {
+		return findFile(datasetPath(), fileName);
+	}
+
+	private static String findFile(String parentDir, String folderName) {
+
 		FilenameFilter fileFilter = new FilenameFilter() {
 			public boolean accept(File directory, String fileName) {
 				return fileName.equals(folderName);
 			}
 		};
-		final String dir = System.getProperty("user.dir");
-		File sourcePath = new File(dir);
+
+		File sourcePath = new File(parentDir);
 		File[] myPath = sourcePath.listFiles(fileFilter);
 		return myPath[0].getPath();
 	}
