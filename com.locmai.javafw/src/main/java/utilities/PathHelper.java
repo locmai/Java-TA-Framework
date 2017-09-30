@@ -6,24 +6,24 @@ import java.io.FilenameFilter;
 import enums.DriverType;
 
 public final class PathHelper {
-	private final static String sourceDir = System.getProperty("user.dir");
+	private final static String SOURCE_DIR = System.getProperty("user.dir");
 
 	public static String driverPath(DriverType driverType) {
-		File driverFolder = new File(findFile(sourceDir, "drivers"));
+		File driverFolder = new File(findFile(SOURCE_DIR, "drivers"));
 		File driverPath = new File(findFile(driverFolder.getPath(), driverType.getExecutableFileName()));
 		return driverPath.getPath();
 	}
 
 	public static String reportPath() {
-		return findFile(sourceDir, "reports");
+		return findFile(SOURCE_DIR, "reports");
 	}
 
 	public static String logPath() {
-		return findFile(sourceDir, "logs");
+		return findFile(SOURCE_DIR, "logs");
 	}
 
 	public static String datasetPath() {
-		return findFile(sourceDir, "dataset");
+		return findFile(SOURCE_DIR, "dataset");
 	}
 
 	public static String datasetPath(String fileName) {

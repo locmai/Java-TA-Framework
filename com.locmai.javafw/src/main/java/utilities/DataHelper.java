@@ -1,47 +1,75 @@
 package utilities;
 
-import java.io.File;
+import java.io.File; 
 import java.io.FileInputStream;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Iterator;
+import java.util.Map;
+import java.util.List;
 
-import org.apache.poi.xssf.usermodel.XSSFCell;
-import org.apache.poi.xssf.usermodel.XSSFRow;
-import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
+import org.apache.poi.ss.usermodel.Sheet;
+import org.apache.poi.ss.usermodel.Workbook;
+import org.apache.poi.ss.usermodel.Cell;
+import org.apache.poi.ss.usermodel.Row;
 
 import utilities.PathHelper;
 
 public final class DataHelper {
-
-	private static XSSFSheet ExcelWSheet;
-	private static XSSFWorkbook ExcelWBook;
-	private static XSSFCell Cell;
-	private static XSSFRow Row;
-
-	public static void setExcelFile(String filePath, String SheetName) throws Exception {
+	private Workbook currentWorkbook;
+	private Map<String,Sheet> allSheet = new HashMap<String, Sheet>();
+	
+	public DataHelper(String filePath) {
 		String path = ExcelPath(filePath);
 		try {
 			// Open the Excel file
 			FileInputStream ExcelFile = new FileInputStream(path);
-			// Access the required test data sheet
-			ExcelWBook = new XSSFWorkbook(ExcelFile);
-			setExcelWSheet(ExcelWBook.getSheet(SheetName));
+			currentWorkbook = new XSSFWorkbook(ExcelFile);
+			addAllSheet();
 		} catch (Exception e) {
-
-			throw (e);
 		}
-
 	}
 
-	public static XSSFSheet getExcelWSheet() {
-		return ExcelWSheet;
+	private void addAllSheet() {
+		for (int i = 0; i < currentWorkbook.getNumberOfSheets(); i++)
+		{
+			Sheet tmpSheet = currentWorkbook.getSheetAt(i);
+		    allSheet.put(tmpSheet.getSheetName(), tmpSheet);
+		}
 	}
 
-	public static void setExcelWSheet(XSSFSheet excelWSheet) {
-		ExcelWSheet = excelWSheet;
+	
+	public List<String> getColumnData(String headerName,String sheetName) {
+		Sheet selectedSheet = getSheet(sheetName);
+		int index = getColumnIndex(headerName, selectedSheet);
+		
+		List<String> cellColumnData = new ArrayList<>();
+		for (int i = 1; i<=selectedSheet.getLastRowNum();i++ ) {
+		
+		}
+		return null;
 	}
-
-	// Provide two options: one is for absolute path and one is for the file in the
-	// dataset folder.
+	
+	private int getColumnIndex(String headerName,Sheet selectedSheet) {
+		Row row = selectedSheet.getRow(0);
+		int index=0;
+		
+		Iterator<Cell> cellIterator = row.cellIterator();
+		while (cellIterator.hasNext()) {
+			Cell cell = cellIterator.next();
+			if (cell.getStringCellValue().equals(headerName)) {
+				index = cell.getColumnIndex();	
+			}
+		}
+		return index;
+	}
+	
+	private Sheet getSheet(String sheetName) {
+		return allSheet.get(sheetName);
+	}
+	
+	
 	private static String ExcelPath(String filePath) {
 		if (new File(filePath).exists()) {
 			return filePath;

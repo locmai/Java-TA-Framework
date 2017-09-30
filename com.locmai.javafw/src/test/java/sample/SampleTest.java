@@ -7,15 +7,13 @@ import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 
-import enums.DeviceType;
 //Core 
 import enums.DriverType;
 import factories.DriverFactory;
 
 public class SampleTest {
-	//WebDriver driver = DriverFactory.getDriver(DriverType.CHROME,DeviceType.IPAD_MINI);
-	WebDriver driver = DriverFactory.getDriver(DriverType.FIREFOX,DeviceType.IPAD_MINI);
-	//WebDriver driver = DriverFactory.getDriver(DriverType.CHROME);
+	WebDriver driver = new DriverFactory().createDriver(DriverType.CHROME_IPAD);
+	
 	@Test
 	public void f() {
 		driver.get("https://www.whatismybrowser.com/");
@@ -24,6 +22,7 @@ public class SampleTest {
 
 	@BeforeTest
 	public void beforeTest() {
+		
 	}
 
 	@AfterTest
