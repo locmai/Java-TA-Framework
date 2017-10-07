@@ -18,6 +18,7 @@ public class SampleTest {
 	public void f() {
 		driver.get("https://www.whatismybrowser.com/");
 		Assert.assertEquals("What browser am I using? Is my browser up to date?", driver.getTitle());
+		
 	}
 
 	@BeforeTest

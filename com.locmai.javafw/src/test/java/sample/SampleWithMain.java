@@ -27,8 +27,6 @@ public class SampleWithMain {
 		System.out.println(logPath);
 		DataHelper dt = new DataHelper("dataset1.xlsx");
 		List<String> test = dt.getColumnData("username", "Login_1");
-		System.out.println(test.get(0) +  " " + test.get(1));
-		
+		System.out.println(test.get(0) +  " " + test.get(1));	
 	}
-
 }

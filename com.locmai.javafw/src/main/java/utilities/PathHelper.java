@@ -30,6 +30,10 @@ public final class PathHelper {
 		return findFile(datasetPath(), fileName);
 	}
 
+	public static String createFile(String dirName,String fileName) {
+		return findFile(SOURCE_DIR,dirName) + File.separator + fileName ;
+	}
+	
 	private static String findFile(String parentDir, String folderName) {
 
 		FilenameFilter fileFilter = new FilenameFilter() {
