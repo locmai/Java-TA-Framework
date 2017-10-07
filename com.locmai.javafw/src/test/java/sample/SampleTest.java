@@ -12,7 +12,7 @@ import enums.DriverType;
 import factories.DriverFactory;
 
 public class SampleTest {
-	WebDriver driver = new DriverFactory().createDriver(DriverType.CHROME_IPAD);
+	WebDriver driver = new DriverFactory().createDriver(DriverType.IPAD);
 	
 	@Test
 	public void f() {

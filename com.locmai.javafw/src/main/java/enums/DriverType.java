@@ -3,8 +3,8 @@ package enums;
 public enum DriverType {
 	CHROME("Chrome", "chromedriver.exe", "webdriver.chrome.driver"),
 	FIREFOX("Firefox", "geckodriver.exe","webdriver.gecko.driver"), 
-	CHROME_IPAD("iPad Mini", "chromedriver.exe", "webdriver.chrome.driver"),
-	CHROME_NEXUS5("Nexus 5", "chromedriver.exe", "webdriver.chrome.driver");
+	IPAD("iPad Mini", "chromedriver.exe", "webdriver.chrome.driver"),
+	NEXUS5("Nexus 5", "chromedriver.exe", "webdriver.chrome.driver");
 	
 	private String browserName;
 	private String executableFileName;

@@ -3,6 +3,8 @@
  */
 package sample;
 
+import java.util.List;
+
 import enums.*;
 import utilities.PathHelper;
 import utilities.DataHelper;
@@ -24,8 +26,9 @@ public class SampleWithMain {
 		System.out.println(reportPath);
 		System.out.println(logPath);
 		DataHelper dt = new DataHelper("dataset1.xlsx");
-		// DataHelper.setExcelFile("/home/locmai/Workspace/java/eclipse-workspace/Java-TA-Framework/com.locmai.javafw/dataset/dataset1.xlsx","Login_2");
-		// System.out.println(DataHelper.getExcelWSheet().getSheetName());
+		List<String> test = dt.getColumnData("username", "Login_1");
+		System.out.println(test.get(0) +  " " + test.get(1));
+		
 	}
 
 }

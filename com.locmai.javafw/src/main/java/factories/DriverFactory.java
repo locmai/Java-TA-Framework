@@ -10,11 +10,8 @@ import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.remote.DesiredCapabilities;
 
-import enums.DeviceType;
 //Import Enums
 import enums.DriverType;
-import factories.browsers.Chrome;
-import factories.browsers.Firefox;
 import utilities.PathHelper;
 
 public class DriverFactory {
@@ -27,12 +24,12 @@ public class DriverFactory {
 			return new ChromeDriver();
 		case FIREFOX:
 			return new FirefoxDriver();
-		case CHROME_IPAD:
+		case IPAD:
 			return MobileDriver(driverType.getBrowserName());
-		case CHROME_NEXUS5:
+		case NEXUS5:
 			return MobileDriver(driverType.getBrowserName());
 		default:
-			return new Chrome().createDriver();
+			return new ChromeDriver();
 		}
 	}
 
