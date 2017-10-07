@@ -19,6 +19,7 @@ import org.openqa.selenium.remote.DesiredCapabilities;
 
 //Import Enums
 import enums.DriverType;
+import enums.FileExtensions;
 import utilities.PathHelper;
 
 //Apache Commons
@@ -63,20 +64,13 @@ public class DriverFactory {
 	
 	public static void takeScreenShot(WebDriver driver) {
 		File src = ((TakesScreenshot) driver).getScreenshotAs(OutputType.FILE);
-		String screenshotDir = PathHelper.createFile("reports", timeStamp() + ".png");
+		String screenshotDir = PathHelper.createFile("reports", FileExtensions.PNG);
 		File tmpFile = new File(screenshotDir);
 		try {
 			FileUtils.copyFile(src, tmpFile);
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			System.err.println("Cannot access the directory");
 		}
-		System.out.println("Screenshot taken and saved:" + screenshotDir);
+		System.out.println("A screenshot is taken and saved: " + screenshotDir);
 	}
-	
-	private static String timeStamp() {
-		return new SimpleDateFormat("yyyy-MM-dd HH-mm-ss").format(new Date());
-	}
-
-	
 }
