@@ -1,3 +1,13 @@
 com.locmai.javafw/test-output
 com.locmai.javafw/.gradle/3.5/
 com.locmai.javafw/bin
+
+*.jar
+*.war
+*.ear
+*.zip
+*.tar.gz
+*.rar
+*.png
+*.class
+*.log
