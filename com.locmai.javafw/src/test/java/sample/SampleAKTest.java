@@ -4,12 +4,11 @@ import org.testng.annotations.Test;
 
 import enums.DriverType;
 import factories.DriverFactory;
-import pages.HomePage;
 import pages.LoginPage;
 
 import org.testng.annotations.BeforeTest;
 import org.openqa.selenium.WebDriver;
-import org.testng.Assert;
+import org.testng.ITestResult;
 import org.testng.annotations.AfterTest;
 
 import sample.urls.CustomUrls;
@@ -36,7 +35,8 @@ public class SampleAKTest {
 	}
 
 	@AfterTest
-	public void afterTest() {
+	public void afterTest(ITestResult result) {
+		
 	}
 
 }

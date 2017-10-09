@@ -53,6 +53,4 @@ public final class PathHelper {
 		File[] myPath = sourcePath.listFiles(fileFilter);
 		return myPath[0].getPath();
 	}
-	
-	
 }

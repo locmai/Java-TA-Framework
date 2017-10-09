@@ -3,8 +3,6 @@ package factories;
 //Java Common
 import java.io.File;
 import java.io.IOException;
-import java.text.SimpleDateFormat;
-import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -62,7 +60,7 @@ public class DriverFactory {
 	}
 
 	
-	public static void takeScreenShot(WebDriver driver) {
+	public static String takeScreenShot(WebDriver driver) {
 		File src = ((TakesScreenshot) driver).getScreenshotAs(OutputType.FILE);
 		String screenshotDir = PathHelper.createFile("reports", FileExtensions.PNG);
 		File tmpFile = new File(screenshotDir);
@@ -72,5 +70,6 @@ public class DriverFactory {
 			System.err.println("Cannot access the directory");
 		}
 		System.out.println("A screenshot is taken and saved: " + screenshotDir);
+		return screenshotDir;
 	}
 }

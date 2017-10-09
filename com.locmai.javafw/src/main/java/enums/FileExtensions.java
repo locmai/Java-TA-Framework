@@ -2,7 +2,8 @@ package enums;
 
 public enum FileExtensions {
 	PNG("png"),
-	LOG("log");
+	LOG("log"),
+	HTML("html");
 	private String extension;
 	private FileExtensions(String extension) {
 		this.extension = extension;
